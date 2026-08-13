@@ -1,1 +1,822 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-2-3(2) 주장하는 글 쓰기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 기본 폰트 및 모달 스크롤 설정 */
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; color: #1f2937; }
+        .modal-active { overflow: hidden; }
+        .flip-card { perspective: 1000px; }
+        .flip-card-inner { transition: transform 0.6s; transform-style: preserve-3d; }
+        .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { backface-visibility: hidden; }
+        .flip-card-back { transform: rotateY(180deg); }
+        canvas { touch-action: none; }
+    </style>
+</head>
+<body class="min-h-screen">
+    <header class="bg-blue-600 text-white p-6 shadow-md text-center">
+        <h1 class="text-3xl font-bold mb-2">1-2-3(2) 주장하는 글 쓰기</h1>
+        <p class="text-blue-200 text-sm">타당한 근거와 논리적 구조를 갖춘 글쓰기 학습 화면임.</p>
+    </header>
 
+    <main class="container mx-auto px-4 py-8 space-y-12 max-w-5xl">
+        <section class="bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-center mb-6 text-blue-800">개념 정리</h2>
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg">
+                <h3 class="text-xl font-semibold mb-4 text-blue-700">주장하는 글 쓰기 방법</h3>
+                <ul class="space-y-3 list-disc list-inside text-gray-700 ml-4">
+                    <li>글쓴이의 주장이 명료하게 드러나게 쓰는 것임.</li>
+                    <li>타당하고 객관적인 근거를 들어 주장을 뒷받침하는 것임.</li>
+                    <li>주관적이거나 모호한 표현을 피하고 적절한 표현을 사용하여 글의 설득력을 높이는 것임.</li>
+                    <li>'서론-본론-결론'의 3단 구조에 맞추어 논리적으로 쓰는 것임.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-center mb-6 text-blue-800">주장하는 글을 쓰는 과정</h2>
+            <p class="text-center text-gray-600 mb-8">각 단계를 클릭하여 자세한 내용을 확인하는 것임.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+                <button onclick="openModal('modal-step-1')" class="bg-indigo-100 hover:bg-indigo-200 transition p-6 rounded-xl text-center shadow-sm border border-indigo-200 flex flex-col justify-center items-center">
+                    <div class="text-sm font-semibold text-indigo-500 mb-1">1단계</div>
+                    <div class="text-2xl font-bold text-indigo-900 tracking-tight">계획하기</div>
+                </button>
+                <button onclick="openModal('modal-step-2')" class="bg-indigo-100 hover:bg-indigo-200 transition p-6 rounded-xl text-center shadow-sm border border-indigo-200 flex flex-col justify-center items-center">
+                    <div class="text-sm font-semibold text-indigo-500 mb-1">2단계</div>
+                    <div class="text-2xl font-bold text-indigo-900 tracking-tight">내용 생성하기</div>
+                </button>
+                <button onclick="openModal('modal-step-3')" class="bg-indigo-100 hover:bg-indigo-200 transition p-6 rounded-xl text-center shadow-sm border border-indigo-200 flex flex-col justify-center items-center">
+                    <div class="text-sm font-semibold text-indigo-500 mb-1">3단계</div>
+                    <div class="text-2xl font-bold text-indigo-900 tracking-tight">내용 조직하기</div>
+                </button>
+                <button onclick="openModal('modal-step-4')" class="bg-indigo-100 hover:bg-indigo-200 transition p-6 rounded-xl text-center shadow-sm border border-indigo-200 flex flex-col justify-center items-center">
+                    <div class="text-sm font-semibold text-indigo-500 mb-1">4단계</div>
+                    <div class="text-2xl font-bold text-indigo-900 tracking-tight">표현하기</div>
+                </button>
+                <button onclick="openModal('modal-step-5')" class="bg-indigo-100 hover:bg-indigo-200 transition p-6 rounded-xl text-center shadow-sm border border-indigo-200 flex flex-col justify-center items-center">
+                    <div class="text-sm font-semibold text-indigo-500 mb-1">5단계</div>
+                    <div class="text-2xl font-bold text-indigo-900 tracking-tight">고쳐쓰기</div>
+                </button>
+            </div>
+        </section>
+
+        <!-- 수정된 본문 내용 정리 섹션 -->
+        <section class="bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-center mb-8 text-blue-800">하나의 성격 유형이 나의 모든 것을 보여주지는 않는다</h2>
+            <p class="text-center text-gray-600 mb-8">각 항목을 클릭하여 자세한 내용을 확인하는 것임.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <button onclick="openModal('modal-content-1')" class="bg-teal-50 hover:bg-teal-100 transition p-6 rounded-xl text-center shadow-sm border border-teal-200">
+                    <div class="text-lg font-bold text-teal-800">글의 짜임 및 문제 상황</div>
+                </button>
+                <button onclick="openModal('modal-content-2')" class="bg-teal-50 hover:bg-teal-100 transition p-6 rounded-xl text-center shadow-sm border border-teal-200">
+                    <div class="text-lg font-bold text-teal-800">주장 및 근거</div>
+                </button>
+                <button onclick="openModal('modal-content-3')" class="bg-teal-50 hover:bg-teal-100 transition p-6 rounded-xl text-center shadow-sm border border-teal-200">
+                    <div class="text-lg font-bold text-teal-800">핵심 정리</div>
+                </button>
+                <button onclick="openModal('modal-content-4')" class="bg-teal-50 hover:bg-teal-100 transition p-6 rounded-xl text-center shadow-sm border border-teal-200">
+                    <div class="text-lg font-bold text-teal-800">수집 자료 및 적절성 평가</div>
+                </button>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-center mb-6 text-blue-800">어휘 정리 (단어 슈팅 게임)</h2>
+            <p class="text-center text-gray-600 mb-6">게임 전 플래시 카드를 통해 어휘를 학습하는 것임. 카드를 터치하거나 마우스를 올리면 뒷면이 보임.</p>
+            
+            <div id="flashcard-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8 h-[600px] overflow-y-auto p-2 border rounded-xl bg-gray-50">
+                <!-- 플래시 카드 동적 생성 영역 -->
+            </div>
+
+            <div class="bg-gray-900 rounded-xl overflow-hidden relative" style="height: 400px;">
+                <div id="game-ui" class="absolute top-0 w-full p-4 flex justify-between items-center text-white z-10 bg-black/50">
+                    <div id="game-meaning" class="text-lg font-bold">뜻이 여기에 표시됨</div>
+                    <div class="flex gap-4 font-mono">
+                        <div id="game-score">점수: 0</div>
+                        <div id="game-accuracy">정답률: 0%</div>
+                    </div>
+                </div>
+                <div id="game-start-screen" class="absolute inset-0 bg-gray-900/90 flex flex-col items-center justify-center z-20 text-white">
+                    <h3 class="text-2xl font-bold mb-4 text-yellow-400">어휘 슈팅 게임</h3>
+                    <p class="mb-2 text-center text-sm">상단에 표시된 뜻에 맞는 단어를 쏘아 맞추는 게임임.</p>
+                    <p class="mb-6 text-center text-sm text-gray-300">이동: 좌우 방향키 (모바일: 화면 좌우 터치)<br>발사: 스페이스바 (모바일: 화면 터치시 자동 발사)</p>
+                    <button onclick="startGame()" class="px-8 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-full transition">게임 시작하기</button>
+                </div>
+                <div id="game-over-screen" class="absolute inset-0 bg-gray-900/90 flex flex-col items-center justify-center z-20 text-white hidden">
+                    <h3 class="text-2xl font-bold mb-4 text-red-400">게임 종료됨</h3>
+                    <p id="final-score" class="mb-6 text-lg"></p>
+                    <button onclick="startGame()" class="px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-full transition">다시 하기</button>
+                </div>
+                <canvas id="gameCanvas" class="w-full h-full block bg-gray-800"></canvas>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-center mb-6 text-blue-800">형성 평가</h2>
+            
+            <div id="quiz-info-form" class="max-w-2xl mx-auto bg-gray-50 p-6 rounded-xl border mb-8">
+                <h3 class="font-bold text-lg mb-4 text-center">인적 사항 입력하기</h3>
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <input type="number" id="info-grade" placeholder="학년 (예: 1)" class="p-3 border rounded-lg w-full">
+                    <input type="number" id="info-class" placeholder="반 (예: 2)" class="p-3 border rounded-lg w-full">
+                    <input type="number" id="info-num" placeholder="번호 (예: 15)" class="p-3 border rounded-lg w-full">
+                    <input type="text" id="info-name" placeholder="이름 (예: 홍길동)" class="p-3 border rounded-lg w-full">
+                </div>
+                <button onclick="startQuiz()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg transition">평가 시작하기</button>
+            </div>
+
+            <div id="quiz-container" class="hidden max-w-3xl mx-auto space-y-8">
+                <!-- 퀴즈 문항 동적 생성 영역 -->
+            </div>
+            
+            <div id="quiz-submit-area" class="hidden mt-8 text-center">
+                <button onclick="submitQuiz()" class="px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg rounded-xl transition shadow-lg">제출 및 채점하기</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- 모달 1 -->
+    <div id="modal-step-1" class="fixed inset-0 bg-black/60 flex items-center justify-center hidden z-50 transition-opacity p-4">
+        <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-step-1')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
+            <h3 class="text-2xl font-bold text-indigo-700 mb-4 border-b pb-2">1단계: 계획하기</h3>
+            <div class="mb-5">
+                <h4 class="font-bold text-gray-800 mb-2">■ 이론 정리</h4>
+                <p class="text-gray-700">문제 상황을 발견하고, 글을 통해 내세울 주장을 정하는 단계임.</p>
+            </div>
+            <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100">
+                <h4 class="font-bold text-indigo-900 mb-2">■ 지유의 글 쓰기 적용 예시</h4>
+                <ul class="list-disc list-inside text-indigo-800 space-y-2 text-sm leading-relaxed">
+                    <li><strong>문제 상황 발견:</strong> 친구들이 엠비티아이(MBTI) 검사 결과에 지나치게 몰입하여 서로를 판단하고 갈등이 생기는 상황을 문제로 인식함.</li>
+                    <li><strong>주장 정하기:</strong> 엠비티아이 검사 결과에 과도하게 의존하지 말고, 올바르게 활용해야 한다는 주장을 정립함.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 모달 2 -->
+    <div id="modal-step-2" class="fixed inset-0 bg-black/60 flex items-center justify-center hidden z-50 transition-opacity p-4">
+        <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-step-2')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
+            <h3 class="text-2xl font-bold text-indigo-700 mb-4 border-b pb-2">2단계: 내용 생성하기</h3>
+            <div class="mb-5">
+                <h4 class="font-bold text-gray-800 mb-2">■ 이론 정리</h4>
+                <p class="text-gray-700">주장을 뒷받침할 자료를 수집하고, 적절한 자료를 선정하여 타당한 근거를 구성하는 단계임.</p>
+            </div>
+            <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100">
+                <h4 class="font-bold text-indigo-900 mb-2">■ 지유의 글 쓰기 적용 예시</h4>
+                <ul class="list-disc list-inside text-indigo-800 space-y-2 text-sm leading-relaxed">
+                    <li><strong>자료 수집:</strong> 성격 유형 검사의 한계를 다룬 책, 무료 검사의 신뢰도를 지적하는 방송, 전문가 인터뷰 등 다양한 매체에서 자료를 수집함.</li>
+                    <li><strong>자료의 적절성 평가:</strong> 수집한 자료가 주장과 긴밀하게 연관되어 있는지, 믿을 만한 객관적인 정보인지 평가하여 타당한 근거를 구성함. (예: 채용 절차법 관련 자료는 주장과 무관하여 배제함.)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 모달 3 -->
+    <div id="modal-step-3" class="fixed inset-0 bg-black/60 flex items-center justify-center hidden z-50 transition-opacity p-4">
+        <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-step-3')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
+            <h3 class="text-2xl font-bold text-indigo-700 mb-4 border-b pb-2">3단계: 내용 조직하기</h3>
+            <div class="mb-5">
+                <h4 class="font-bold text-gray-800 mb-2">■ 이론 정리</h4>
+                <p class="text-gray-700">'서론-본론-결론'의 구조에 맞추어 개요를 작성하는 단계임.</p>
+            </div>
+            <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100">
+                <h4 class="font-bold text-indigo-900 mb-2">■ 지유의 글 쓰기 적용 예시</h4>
+                <p class="text-indigo-800 text-sm mb-2">다음과 같이 3단 구조로 개요를 체계적으로 작성함.</p>
+                <ul class="list-disc list-inside text-indigo-800 space-y-2 text-sm leading-relaxed">
+                    <li><strong>서론:</strong> 엠비티아이 검사 유행으로 인한 문제 상황(갈등, 채용 논란) 제시 및 주장 제기함.</li>
+                    <li><strong>본론:</strong> 중간 성격 설명의 어려움, 무료 검사의 낮은 신뢰도, 상황에 따라 바뀌는 결과라는 3가지 근거를 체계적으로 배치함.</li>
+                    <li><strong>결론:</strong> 본론을 요약하고, 검사 결과를 올바른 참고 자료로만 활용하자는 주장을 강조함.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 모달 4 -->
+    <div id="modal-step-4" class="fixed inset-0 bg-black/60 flex items-center justify-center hidden z-50 transition-opacity p-4">
+        <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-step-4')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
+            <h3 class="text-2xl font-bold text-indigo-700 mb-4 border-b pb-2">4단계: 표현하기</h3>
+            <div class="mb-5">
+                <h4 class="font-bold text-gray-800 mb-2">■ 이론 정리</h4>
+                <p class="text-gray-700">조직된 내용을 바탕으로 주장을 명료하게 드러내며 적절한 표현을 사용하여 글을 직접 쓰는 단계임.</p>
+            </div>
+            <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100">
+                <h4 class="font-bold text-indigo-900 mb-2">■ 지유의 글 쓰기 적용 예시</h4>
+                <ul class="list-disc list-inside text-indigo-800 space-y-2 text-sm leading-relaxed">
+                    <li>개요를 바탕으로 구체적인 수치와 예시, 전문가의 의견을 활용하여 설득력 있게 초고를 작성함.</li>
+                    <li>"당연히 ~나올 수밖에 없다고 생각한다"와 같은 <strong>단정적이고 주관적인 표현을 배제</strong>하고 객관적인 문장으로 서술하려고 노력함.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 모달 5 -->
+    <div id="modal-step-5" class="fixed inset-0 bg-black/60 flex items-center justify-center hidden z-50 transition-opacity p-4">
+        <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-step-5')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
+            <h3 class="text-2xl font-bold text-indigo-700 mb-4 border-b pb-2">5단계: 고쳐쓰기</h3>
+            <div class="mb-5">
+                <h4 class="font-bold text-gray-800 mb-2">■ 이론 정리</h4>
+                <p class="text-gray-700">완성된 글을 점검 기준(근거의 타당성, 표현의 적절성, 구조의 완결성 등)에 따라 평가하고 수정하는 단계임.</p>
+            </div>
+            <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100">
+                <h4 class="font-bold text-indigo-900 mb-2">■ 지유의 글 쓰기 적용 예시</h4>
+                <ul class="list-disc list-inside text-indigo-800 space-y-2 text-sm leading-relaxed">
+                    <li><strong>서론 보완:</strong> 글의 소재와 관련한 최근 사회 현상을 추가로 언급하여 독자의 흥미를 끌도록 수정함.</li>
+                    <li><strong>명확한 표현 사용:</strong> "어떤 사람들"이라는 모호한 표현 대상을 "청소년들"로 명확하게 고쳐 글의 전달력을 높임.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 본문 내용 모달 1 -->
+    <div id="modal-content-1" class="fixed inset-0 bg-black/60 flex items-center justify-center hidden z-50 transition-opacity p-4">
+        <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-content-1')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
+            <h3 class="text-2xl font-bold text-teal-700 mb-6 border-b pb-2">글의 짜임 및 문제 상황</h3>
+            <div class="space-y-4 text-gray-700">
+                <div>
+                    <strong>■ 글의 짜임 (3단 구성)</strong>
+                    <ul class="list-disc ml-5 mt-2 space-y-2">
+                        <li><strong>서론:</strong> 엠비티아이(MBTI) 검사의 유행으로 인한 문제 상황 제시 및 주장(올바른 활용) 제기함.</li>
+                        <li><strong>본론:</strong> 엠비티아이 검사 결과에 과도하게 의존하면 안 되는 까닭(근거 1, 2, 3)을 구체적으로 제시함.</li>
+                        <li><strong>결론:</strong> 내용을 요약하며 엠비티아이 검사 결과를 맹신하지 말고 올바르게 활용하자는 당부를 강조함.</li>
+                    </ul>
+                </div>
+                <div class="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <strong>■ 문제 상황:</strong> 엠비티아이(MBTI) 검사 결과에 과도하게 의존하여 채용 과정에서 논란이 되거나, 청소년 사이에서 갈등이 발생하는 상황임.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 본문 내용 모달 2 -->
+    <div id="modal-content-2" class="fixed inset-0 bg-black/60 flex items-center justify-center hidden z-50 transition-opacity p-4">
+        <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-content-2')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
+            <h3 class="text-2xl font-bold text-teal-700 mb-6 border-b pb-2">주장 및 근거</h3>
+            <div class="space-y-4 text-gray-700">
+                <div class="p-4 bg-teal-50 rounded-lg text-teal-900 border border-teal-200">
+                    <strong>■ 주장:</strong> 엠비티아이(MBTI) 검사 결과에 과도하게 의존하지 말고, 올바르게 활용해야 함.
+                </div>
+                <div class="mt-4">
+                    <strong>■ 근거:</strong>
+                    <ol class="list-decimal ml-5 mt-3 space-y-3">
+                        <li class="pl-2">성격 특성을 둘로 나누는 엠비티아이 검사로는 <strong>중간 성격을 설명하기 어려움.</strong></li>
+                        <li class="pl-2">대중적으로 널리 쓰이는 무료 성격 유형 검사는 <strong>신뢰도가 떨어지는 자료가 뒤섞여 있음.</strong></li>
+                        <li class="pl-2"><strong>응답자의 상태나 상황에 따라</strong> 검사 결과가 바뀔 수 있음.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 본문 내용 모달 3 -->
+    <div id="modal-content-3" class="fixed inset-0 bg-black/60 flex items-center justify-center hidden z-50 transition-opacity p-4">
+        <div class="bg-white w-full max-w-3xl rounded-2xl shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-content-3')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
+            <h3 class="text-2xl font-bold text-teal-700 mb-6 border-b pb-2">핵심 정리</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left border-collapse border border-gray-300 bg-white">
+                    <tbody>
+                        <tr class="border-b border-gray-300">
+                            <th class="bg-gray-100 p-3 w-1/5 border-r border-gray-300 whitespace-nowrap">갈래</th>
+                            <td class="p-3">주장하는 글 (논설문)</td>
+                        </tr>
+                        <tr class="border-b border-gray-300">
+                            <th class="bg-gray-100 p-3 w-1/5 border-r border-gray-300 whitespace-nowrap">성격</th>
+                            <td class="p-3">설득적, 논리적, 비판적</td>
+                        </tr>
+                        <tr class="border-b border-gray-300">
+                            <th class="bg-gray-100 p-3 w-1/5 border-r border-gray-300 whitespace-nowrap">소재</th>
+                            <td class="p-3">엠비티아이(MBTI) 검사 결과에 대한 의존</td>
+                        </tr>
+                        <tr class="border-b border-gray-300">
+                            <th class="bg-gray-100 p-3 w-1/5 border-r border-gray-300 whitespace-nowrap">주제</th>
+                            <td class="p-3 font-semibold text-teal-800">엠비티아이(MBTI) 검사 결과에 과도하게 의존하지 말고, 올바르게 활용하자.</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-gray-100 p-3 w-1/5 border-r border-gray-300 whitespace-nowrap">특징</th>
+                            <td class="p-3">
+                                <ul class="list-disc ml-4 space-y-2 text-gray-700">
+                                    <li>최근 사회적으로 화제가 되는 현상을 문제 상황으로 제시함.</li>
+                                    <li>전문가의 의견 및 정식 검사 결과지 내용 등을 인용하여 주장의 객관성과 신뢰도를 높임.</li>
+                                    <li>구체적인 수치와 예시를 제시하여 독자의 이해를 도움.</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 본문 내용 모달 4 -->
+    <div id="modal-content-4" class="fixed inset-0 bg-black/60 flex items-center justify-center hidden z-50 transition-opacity p-4">
+        <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-content-4')" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
+            <h3 class="text-2xl font-bold text-teal-700 mb-6 border-b pb-2">지유가 수집한 자료와 근거 활용의 적절성 평가</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left border-collapse border border-gray-300 bg-white">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="border border-gray-300 p-3 w-12 text-center whitespace-nowrap">자료</th>
+                            <th class="border border-gray-300 p-3 min-w-[250px]">내용</th>
+                            <th class="border border-gray-300 p-3 w-1/3 text-center min-w-[200px]">근거의 적절성 평가</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border border-gray-300 p-3 text-center font-bold bg-gray-50">가</td>
+                            <td class="border border-gray-300 p-3">성격 특성을 둘로 나누는 엠비티아이 검사의 한계점을 드러내는 자료</td>
+                            <td class="border border-gray-300 p-4 text-gray-800 leading-relaxed" rowspan="4">
+                                주장과 긴밀하게 연관되어 있고, 신뢰할 만한 자료이므로 근거로 활용하기에 <strong class="text-blue-600 block mt-1 text-lg">적절함.</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 p-3 text-center font-bold bg-gray-50">나</td>
+                            <td class="border border-gray-300 p-3">대중적으로 널리 쓰이는 무료 성격 유형 검사의 신뢰도를 지적하는 자료</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 p-3 text-center font-bold bg-gray-50">다</td>
+                            <td class="border border-gray-300 p-3">응답자의 상태나 상황에 따라 엠비티아이 검사 결과가 바뀔 수 있음을 설명하는 자료</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 p-3 text-center font-bold bg-gray-50">라</td>
+                            <td class="border border-gray-300 p-3">엠비티아이 검사 결과를 활용하는 올바른 태도에 관한 전문가의 의견</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-300 p-3 text-center font-bold bg-gray-50">마</td>
+                            <td class="border border-gray-300 p-3">기업이 채용 과정에서 엠비티아이 검사 결과를 활용하는 것이 법적으로 문제가 없음을 설명하는 자료</td>
+                            <td class="border border-gray-300 p-4 text-gray-800 leading-relaxed">
+                                주장과 긴밀하게 연관되어 있지 않아 근거로 활용하기에 <strong class="text-red-600 block mt-1 text-lg">적절하지 않음.</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 모달 관리
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+            document.body.classList.add('modal-active');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            document.body.classList.remove('modal-active');
+        }
+
+        // 어휘 데이터 (30개)
+        const vocabulary = [
+            { word: "근거", meaning: "어떤 일이나 판단 등이 나오게 된 바탕", example: "주장에 타당한 근거를 제시함." },
+            { word: "주장", meaning: "자기의 의견이나 주의를 굳게 내세움", example: "자신의 주장을 논리적으로 전개함." },
+            { word: "타당하다", meaning: "일의 이치로 보아 옳다", example: "근거가 타당하여 설득력이 있음." },
+            { word: "과도하다", meaning: "정도에 지나치다", example: "결과에 과도하게 의존하는 것은 위험함." },
+            { word: "내향", meaning: "마음의 작용이 자신에게만 향함", example: "내향 성향이 강해 혼자만의 시간을 즐김." },
+            { word: "맹신하다", meaning: "옳고 그름을 가리지 않고 덮어놓고 믿다", example: "인터넷 정보를 맹신하는 태도를 버림." },
+            { word: "무분별하다", meaning: "사물을 구별하여 가름이 없다", example: "무분별한 정보 수용을 경계함." },
+            { word: "선호", meaning: "여럿 가운데서 특별히 가려서 좋아함", example: "특정 성향에 대한 선호가 나타남." },
+            { word: "성격", meaning: "개인이 가지고 있는 고유의 성질이나 품성", example: "조용하고 사려 깊은 성격임." },
+            { word: "신뢰도", meaning: "굳게 믿고 의지할 수 있는 정도", example: "전문가의 의견으로 신뢰도를 높임." },
+            { word: "오류", meaning: "그릇되어 이치에 맞지 않는 일", example: "성격을 둘로만 나누면 오류가 생김." },
+            { word: "외향", meaning: "마음의 움직임이 적극적으로 밖으로 나타남", example: "외향 성향이 강해 활동적임." },
+            { word: "의존하다", meaning: "다른 것에 의지하여 존재하다", example: "검사 결과에만 의존하여 사람을 판단함." },
+            { word: "설득", meaning: "상대편이 이야기를 따르도록 깨우쳐 말함", example: "상대방을 설득하기 위해 논리적으로 말함." },
+            { word: "덧붙이다", meaning: "군더더기로 딸리게 하다", example: "자신의 의견에 새로운 생각을 덧붙임." },
+            { word: "수집하다", meaning: "거두어 모으다", example: "글을 쓰기 위해 다양한 자료를 수집함." },
+            { word: "명료하다", meaning: "뚜렷하고 분명하다", example: "주제가 아주 명료하게 전달됨." },
+            { word: "적절하다", meaning: "꼭 알맞다", example: "상황에 맞는 적절한 단어를 선택함." },
+            { word: "화제", meaning: "이야기할 만한 재료나 소재", example: "성격 유형 검사가 새로운 화제가 됨." },
+            { word: "즉흥적", meaning: "그 자리에서 일어나는 기분에 따라 하는 것", example: "계획 없이 즉흥적인 행동을 함." },
+            { word: "지나치다", meaning: "일정한 한도를 넘어 정도가 심하다", example: "지나친 몰입은 일상생활을 방해함." },
+            { word: "몰입", meaning: "깊이 파고들거나 빠짐", example: "결과에 대한 몰입이 부작용을 낳음." },
+            { word: "구분하다", meaning: "기준에 따라 전체를 나누다", example: "사람의 성향을 몇 가지로 구분함." },
+            { word: "인위적", meaning: "사람의 힘으로 이루어지는 것", example: "연속적인 성격을 인위적으로 나눔." },
+            { word: "개인차", meaning: "개인의 능력이나 특성의 차이", example: "검사 결과의 해석에는 개인차가 존재함." },
+            { word: "채용", meaning: "사람을 골라서 씀", example: "기업의 신입 사원 채용에 검사가 쓰임." },
+            { word: "위반", meaning: "법률이나 약속 등을 어김", example: "법률 위반 여부를 두고 논란이 됨." },
+            { word: "직무", meaning: "담당하여 맡은 사무", example: "직무 능력과 성격은 일치하지 않을 수 있음." },
+            { word: "대중적", meaning: "수많은 사람의 무리를 중심으로 한 것", example: "대중적인 인기를 얻고 있는 검사임." },
+            { word: "일관성", meaning: "방법이나 태도 등이 한결같은 성질", example: "글의 흐름이 일관성을 유지함." }
+        ];
+
+        function renderFlashcards() {
+            const container = document.getElementById('flashcard-container');
+            vocabulary.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "flip-card h-32 cursor-pointer";
+                card.innerHTML = `
+                    <div class="flip-card-inner relative w-full h-full text-center rounded-xl shadow-md">
+                        <div class="flip-card-front absolute w-full h-full bg-white border border-gray-200 rounded-xl flex items-center justify-center">
+                            <h3 class="text-xl font-bold text-blue-900">${item.word}</h3>
+                        </div>
+                        <div class="flip-card-back absolute w-full h-full bg-blue-600 text-white rounded-xl p-3 flex flex-col items-center justify-center overflow-hidden">
+                            <p class="font-bold text-sm mb-1">${item.meaning}</p>
+                            <p class="text-xs text-blue-100 italic block mt-1 break-keep">예: ${item.example}</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+        renderFlashcards();
+
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        let gameAnimationFrame;
+        let isGameRunning = false;
+        
+        let player = { x: 0, y: 0, w: 40, h: 40, speed: 5, color: '#facc15' };
+        let bullets = [];
+        let enemies = [];
+        let currentTargetIndex = 0;
+        let score = 0;
+        let shotsFired = 0;
+        let hitCount = 0;
+        let baseSpeed = 0.5;
+        
+        // 키 입력 상태
+        const keys = { ArrowLeft: false, ArrowRight: false, Space: false };
+
+        // 캔버스 크기 조정
+        function resizeCanvas() {
+            const parent = canvas.parentElement;
+            canvas.width = parent.clientWidth;
+            canvas.height = parent.clientHeight;
+            if(!isGameRunning) {
+                player.x = canvas.width / 2 - player.w / 2;
+                player.y = canvas.height - player.h - 10;
+            }
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        document.addEventListener('keydown', e => {
+            if(e.code === 'ArrowLeft') keys.ArrowLeft = true;
+            if(e.code === 'ArrowRight') keys.ArrowRight = true;
+            if(e.code === 'Space') { e.preventDefault(); keys.Space = true; shoot(); }
+        });
+        document.addEventListener('keyup', e => {
+            if(e.code === 'ArrowLeft') keys.ArrowLeft = false;
+            if(e.code === 'ArrowRight') keys.ArrowRight = false;
+            if(e.code === 'Space') keys.Space = false;
+        });
+
+        // 터치 조작 로직
+        canvas.addEventListener('touchstart', handleTouch);
+        canvas.addEventListener('touchmove', handleTouch);
+        function handleTouch(e) {
+            e.preventDefault();
+            if(!isGameRunning) return;
+            const touch = e.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            const touchX = touch.clientX - rect.left;
+            player.x = touchX - player.w / 2;
+            
+            // 화면 경계 제한
+            if(player.x < 0) player.x = 0;
+            if(player.x + player.w > canvas.width) player.x = canvas.width - player.w;
+            
+            // 터치 이동시 발사 (스로틀링)
+            if (Math.random() < 0.2) shoot(); 
+        }
+
+        function shoot() {
+            if(!isGameRunning) return;
+            bullets.push({ x: player.x + player.w/2 - 2.5, y: player.y, w: 5, h: 15, speed: 7, color: '#60a5fa' });
+            shotsFired++;
+            updateUI();
+        }
+
+        function spawnEnemies() {
+            enemies = [];
+            // 정답 1개와 오답 2개 선택
+            let targetWord = vocabulary[currentTargetIndex];
+            let options = [targetWord];
+            let pool = [...vocabulary];
+            pool.splice(currentTargetIndex, 1);
+            
+            // 오답 2개 셔플
+            pool.sort(() => 0.5 - Math.random());
+            options.push(pool[0]);
+            options.push(pool[1]);
+            
+            // 보기 섞기
+            options.sort(() => 0.5 - Math.random());
+
+            // 상단 UI 업데이트
+            document.getElementById('game-meaning').innerText = `"${targetWord.meaning}"`;
+
+            let segmentWidth = canvas.width / 3;
+            for(let i=0; i<3; i++) {
+                enemies.push({
+                    x: segmentWidth * i + (segmentWidth / 2) - 30,
+                    y: -50,
+                    w: 60,
+                    h: 30,
+                    text: options[i].word,
+                    isTarget: options[i].word === targetWord.word,
+                    speed: baseSpeed + Math.random() * 0.5 // 약간의 속도 편차
+                });
+            }
+        }
+
+        function updateUI() {
+            document.getElementById('game-score').innerText = `점수: ${score}`;
+            let accuracy = shotsFired === 0 ? 0 : Math.round((hitCount / shotsFired) * 100);
+            document.getElementById('game-accuracy').innerText = `정답률: ${accuracy}%`;
+        }
+
+        function endGame() {
+            isGameRunning = false;
+            cancelAnimationFrame(gameAnimationFrame);
+            document.getElementById('game-over-screen').classList.remove('hidden');
+            let accuracy = shotsFired === 0 ? 0 : Math.round((hitCount / shotsFired) * 100);
+            document.getElementById('final-score').innerText = `최종 점수: ${score}점 (정답률 ${accuracy}%)`;
+        }
+
+        function gameLoop() {
+            if(!isGameRunning) return;
+
+            // 배경 지우기
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 플레이어 이동
+            if(keys.ArrowLeft && player.x > 0) player.x -= player.speed;
+            if(keys.ArrowRight && player.x < canvas.width - player.w) player.x += player.speed;
+
+            // 플레이어 그리기 (비행기 모양)
+            ctx.fillStyle = player.color;
+            ctx.beginPath();
+            ctx.moveTo(player.x + player.w/2, player.y);
+            ctx.lineTo(player.x + player.w, player.y + player.h);
+            ctx.lineTo(player.x, player.y + player.h);
+            ctx.fill();
+
+            // 총알 이동 및 그리기
+            for(let i = bullets.length - 1; i >= 0; i--) {
+                let b = bullets[i];
+                b.y -= b.speed;
+                ctx.fillStyle = b.color;
+                ctx.fillRect(b.x, b.y, b.w, b.h);
+                if(b.y < 0) bullets.splice(i, 1);
+            }
+
+            // 적(단어) 이동 및 그리기
+            for(let i = enemies.length - 1; i >= 0; i--) {
+                let e = enemies[i];
+                e.y += e.speed;
+                
+                // 단어 그리기 배경
+                ctx.fillStyle = '#1f2937';
+                ctx.fillRect(e.x, e.y, e.w, e.h);
+                ctx.strokeStyle = '#3b82f6';
+                ctx.strokeRect(e.x, e.y, e.w, e.h);
+                
+                // 텍스트 그리기
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '14px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(e.text, e.x + e.w/2, e.y + e.h/2);
+
+                // 바닥에 닿으면 게임 오버
+                if(e.y > canvas.height) {
+                    endGame();
+                    return;
+                }
+
+                // 충돌 체크
+                for(let j = bullets.length - 1; j >= 0; j--) {
+                    let b = bullets[j];
+                    if(b.x < e.x + e.w && b.x + b.w > e.x && b.y < e.y + e.h && b.y + b.h > e.y) {
+                        bullets.splice(j, 1);
+                        if(e.isTarget) {
+                            // 정답!
+                            hitCount++;
+                            score += 10;
+                            
+                            // 난이도 상승 로직: 정답 누적에 따라 속도 증가
+                            if (hitCount % 3 === 0) {
+                                baseSpeed += 0.1;
+                            }
+                            
+                            updateUI();
+                            currentTargetIndex = (currentTargetIndex + 1) % vocabulary.length;
+                            spawnEnemies();
+                            break;
+                        } else {
+                            // 오답! 감점
+                            score = Math.max(0, score - 5);
+                            enemies.splice(i, 1);
+                            updateUI();
+                        }
+                    }
+                }
+            }
+
+            gameAnimationFrame = requestAnimationFrame(gameLoop);
+        }
+
+        function startGame() {
+            document.getElementById('game-start-screen').classList.add('hidden');
+            document.getElementById('game-over-screen').classList.add('hidden');
+            resizeCanvas();
+            
+            player.x = canvas.width / 2 - player.w / 2;
+            player.y = canvas.height - player.h - 10;
+            bullets = [];
+            score = 0;
+            shotsFired = 0;
+            hitCount = 0;
+            baseSpeed = 0.5;
+            
+            // 단어 섞기
+            vocabulary.sort(() => 0.5 - Math.random());
+            currentTargetIndex = 0;
+            
+            updateUI();
+            spawnEnemies();
+            
+            isGameRunning = true;
+            gameLoop();
+        }
+
+        const quizData = [
+            { type: "ox", q: "주장하는 글은 독자에게 정보를 전달하려는 목적으로 쓰는 글임.", ans: "X", exp: "설득을 목적으로 하는 글임." },
+            { type: "ox", q: "주장하는 글을 쓸 때에는 타당한 근거를 들어 주장을 뒷받침해야 함.", ans: "O", exp: "주장을 논리적으로 전개하기 위해 타당한 근거가 필수적임." },
+            { type: "short", q: "주장하는 글의 구조 중 타당한 근거를 구체적으로 제시하는 가운데 단계의 명칭은?", ans: "본론", exp: "서론-본론-결론 구조 중 본론에 해당함." },
+            { type: "short", q: "어떤 일이나 판단이 나오게 된 바탕이나 까닭을 의미하는 단어는?", ans: "근거", exp: "주장을 뒷받침하는 핵심 요소임." },
+            { type: "mc", q: "'계획하기' 단계의 활동으로 적절한 것은?", options: ["자료 수집", "개요 작성", "문제 상황 발견 및 주장 정하기", "글의 구조 점검", "근거 제시"], ans: 3, exp: "계획하기 단계에서는 문제 상황을 찾고 주장을 정함." },
+            { type: "mc", q: "주장을 점검할 때 '표현의 적절성' 고려 사항이 아닌 것은?", options: ["단정적인 표현 배제", "주관적인 표현 배제", "모호한 표현 배제", "근거의 객관성 확인", "주장을 명료하게 드러내는 표현"], ans: 4, exp: "근거의 객관성 확인은 '근거의 타당성' 점검 항목임." },
+            { type: "mc", q: "본문 '하나의 성격 유형이...'의 핵심 소재는?", options: ["별자리 운세", "혈액형 성격설", "엠비티아이(MBTI) 검사", "직업 적성 검사", "지능 지수(IQ)"], ans: 3, exp: "엠비티아이(MBTI) 검사에 대한 과도한 의존을 다루고 있음." },
+            { type: "mc", q: "본문에서 제시한 주장의 근거가 아닌 것은?", options: ["중간 성격을 설명하기 어려움", "신뢰도가 떨어지는 자료가 뒤섞여 있음", "응답자 상태에 따라 결과가 바뀔 수 있음", "검사 비용이 과도하게 비쌈", "성격을 이분법적으로 나눔"], ans: 4, exp: "비용 문제는 글의 근거로 제시되지 않았음." },
+            { type: "mc", q: "본문에서 설득력을 높이기 위해 사용한 방법은?", options: ["개인적인 감정에 호소", "전문가의 의견 인용", "단정적이고 강한 어조 사용", "다른 성격 검사의 단점 부각", "은어나 유행어 사용"], ans: 2, exp: "심리학과 교수 등 전문가의 의견을 인용하여 신뢰도를 높였음." },
+            { type: "mc", q: "글쓴이가 말하는 엠비티아이 검사 결과의 올바른 활용 방법은?", options: ["사람을 평가하는 절대적 기준으로 삼기", "결과를 맹신하고 따르기", "채용의 핵심 자료로 활용하기", "무의미한 검사이므로 무시하기", "자신과 타인을 이해하는 참고 자료로 활용하기"], ans: 5, exp: "자신을 이해하고 타인을 이해하는 데 도움을 주는 참고 자료로 활용해야 한다고 주장함." }
+        ];
+
+        let studentInfo = {};
+
+        function startQuiz() {
+            const g = document.getElementById('info-grade').value;
+            const c = document.getElementById('info-class').value;
+            const n = document.getElementById('info-num').value;
+            const name = document.getElementById('info-name').value;
+
+            if(!g || !c || !n || !name) {
+                alert("인적 사항을 모두 입력하는 것임.");
+                return;
+            }
+            
+            studentInfo = { grade: g, classNum: c, studentNum: n, name: name };
+            document.getElementById('quiz-info-form').classList.add('hidden');
+            
+            renderQuiz();
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('quiz-submit-area').classList.remove('hidden');
+        }
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            quizData.forEach((q, index) => {
+                const qDiv = document.createElement('div');
+                qDiv.className = "bg-gray-50 p-6 rounded-xl border border-gray-200 shadow-sm";
+                
+                let html = `<h4 class="text-lg font-bold mb-4"><span class="text-blue-600">Q${index + 1}.</span> ${q.q}</h4>`;
+                
+                if(q.type === 'ox') {
+                    html += `
+                        <div class="flex gap-4">
+                            <label class="flex-1 cursor-pointer bg-white border border-gray-300 p-4 rounded-lg text-center font-bold text-xl hover:bg-blue-50 transition">
+                                <input type="radio" name="q${index}" value="O" class="hidden peer">
+                                <div class="peer-checked:text-blue-600">O</div>
+                            </label>
+                            <label class="flex-1 cursor-pointer bg-white border border-gray-300 p-4 rounded-lg text-center font-bold text-xl hover:bg-red-50 transition">
+                                <input type="radio" name="q${index}" value="X" class="hidden peer">
+                                <div class="peer-checked:text-red-600">X</div>
+                            </label>
+                        </div>
+                    `;
+                } else if(q.type === 'short') {
+                    html += `<input type="text" name="q${index}" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="정답을 입력하세요">`;
+                } else if(q.type === 'mc') {
+                    html += `<div class="space-y-2">`;
+                    q.options.forEach((opt, oIndex) => {
+                        html += `
+                            <label class="flex items-center p-3 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-blue-50 transition">
+                                <input type="radio" name="q${index}" value="${oIndex + 1}" class="mr-3 w-5 h-5 text-blue-600">
+                                <span>${oIndex + 1}. ${opt}</span>
+                            </label>
+                        `;
+                    });
+                    html += `</div>`;
+                }
+
+                // 피드백 영역 (초기 숨김)
+                html += `
+                    <div id="feedback-q${index}" class="mt-4 p-4 rounded-lg hidden font-medium"></div>
+                `;
+
+                qDiv.innerHTML = html;
+                container.appendChild(qDiv);
+            });
+        }
+
+        function submitQuiz() {
+            let totalScore = 0;
+            let userAnswers = [];
+            let gradingResults = [];
+            let allAnswered = true;
+
+            quizData.forEach((q, index) => {
+                let ans = '';
+                if(q.type === 'short') {
+                    ans = document.querySelector(`input[name="q${index}"]`).value.trim();
+                } else {
+                    const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                    ans = selected ? selected.value : '';
+                }
+
+                if(!ans) allAnswered = false;
+
+                userAnswers.push(ans);
+                
+                let isCorrect = false;
+                if(q.type === 'ox' || q.type === 'short') {
+                    isCorrect = (ans === q.ans);
+                } else {
+                    isCorrect = (parseInt(ans) === q.ans);
+                }
+
+                gradingResults.push(isCorrect ? "O" : "X");
+                if(isCorrect) totalScore += 10; // 문항당 10점
+
+                // UI 피드백 업데이트
+                const feedbackDiv = document.getElementById(`feedback-q${index}`);
+                feedbackDiv.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');
+                if(isCorrect) {
+                    feedbackDiv.classList.add('bg-green-100', 'text-green-800');
+                    feedbackDiv.innerHTML = `✅ 정답임! <br><span class="text-sm text-gray-700 mt-1 block">${q.exp}</span>`;
+                } else {
+                    feedbackDiv.classList.add('bg-red-100', 'text-red-800');
+                    feedbackDiv.innerHTML = `❌ 오답임. (정답: ${q.ans}) <br><span class="text-sm text-gray-700 mt-1 block">${q.exp}</span>`;
+                }
+            });
+
+            if(!allAnswered) {
+                if(!confirm("풀지 않은 문제가 있음. 그래도 제출하는 것임?")) return;
+            }
+
+            // 제출 버튼 숨기기
+            document.getElementById('quiz-submit-area').classList.add('hidden');
+
+            const payload = {
+                ...studentInfo,
+                totalScore: totalScore,
+                answers: userAnswers,
+                results: gradingResults
+            };
+
+            // 구글 Apps Script 내부 전송 프로토콜 (google.script.run)
+            if (typeof google !== 'undefined' && google.script) {
+                // Apps Script 환경에서 실행될 때
+                google.script.run
+                    .withSuccessHandler(function(res) {
+                        showFinalMessage(totalScore, "성공적으로 제출되었음!");
+                    })
+                    .withFailureHandler(function(err) {
+                        showFinalMessage(totalScore, "제출 중 오류가 발생함: " + err);
+                    })
+                    .submitQuizData(payload);
+            } else {
+                // 로컬 테스트 환경 안내
+                console.log("제출될 데이터 payload:", payload);
+                showFinalMessage(totalScore, "로컬 환경임. 콘솔에서 수집된 데이터를 확인하는 것임.");
+            }
+        }
+
+        function showFinalMessage(score, msg) {
+            const container = document.getElementById('quiz-container');
+            const resultMsg = document.createElement('div');
+            resultMsg.className = "bg-blue-100 border-2 border-blue-500 p-6 rounded-xl text-center shadow-lg mt-8";
+            resultMsg.innerHTML = `
+                <h3 class="text-2xl font-bold text-blue-800 mb-2">평가 완료됨!</h3>
+                <p class="text-xl font-bold mb-2">총점: <span class="text-red-600">${score}</span>점 / 100점</p>
+                <p class="text-gray-700">${msg}</p>
+            `;
+            container.insertBefore(resultMsg, container.firstChild);
+            
+            // 페이지 상단으로 스크롤
+            resultMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+</body>
+</html>
